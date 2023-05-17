@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS display2</title>
+    <style>
+        div {
+            border: 1px solid lightgray;
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+            width: 200px;
+            height: 250px;
+            margin: 5px;
+        }
+
+        div img {
+            display: block;
+            width: 100%;
+            margin: 10px 0px;
+        }
+
+        div button {
+            width: 200px;
+            margin: 10px 0px;
+            background: mediumseagreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 0px;
+            font-weight: bold;
+        }
+
+        div span {
+            margin: 10px 0px;
+            display: inline-block;
+        }
+
+        div .span_bg {
+            color: red;
+            background: lightgray;
+            margin: 10px 0px;
+            display: inline-block;
+        }
+        
+        button:hover {
+        	cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>display</h1>
+    <div id="d1">
+        <span class="span_bg">display:none</span>
+        <img src="img_5terre.jpg">
+        <button onclick="btn_click('Remove')">Remove</button>
+    </div>
+    <div id="d2">
+        <span class="span_bg">display:hidden</span>
+        <img src="img_forest.jpg">
+        <button onclick="btn_click('Hide')">Hide</button>
+    </div>
+    <div id="d3">
+        <span>Reset</span>
+        <img src="img_lights.jpg">
+        <button onclick="btn_click('Reset')">Reset All</button>
+    </div>
+
+	<script>
+        function btn_click(btnName) {
+        	if (btnName == 'Remove') {
+                // display:none
+                var d1 = document.getElementById("d1");
+                d1.style.display = "none";
+            } else if(btnName == 'Hide') {
+                var d2 = document.getElementById("d2");
+                d2.style.visibility = "hidden";
+            } else if(btnName == 'Reset') {
+                var d1 = document.getElementById("d1");
+                var d2 = document.getElementById("d2")
+                d1.style.display = "inline-block";
+                d2.style.visibility = "visible";
+            }
+        }
+    </script>
+</body>
+
+</html>

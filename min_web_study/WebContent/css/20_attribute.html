@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS - Attribute</title>
+	<style>
+		a[target='_self']	 {
+			background: tomato;
+		}
+		
+		img[title~="logo"] { /* 공백포함 찾기 */
+			border: 2px solid blue;	
+		}
+		
+		img[class^="cgv"] { /* 단어로 시작하는 요소 찾기 */
+			opacity: 0.5;
+		}
+		
+		img[class|="cgv"]:hover { /* 하이픈포함 찾기 */
+			opacity: 1;
+		}
+
+		img[class$="test"] { /* 단어로 끝나는 요소 찾기 */
+			border: 3px dotted green;
+		}
+		
+		img[class*="cg"] { /* 단어가 포함되어있는 요소 찾기 */
+			outline: 5px solid red;
+		}
+	</style>
+	
+</head>
+<body>
+	<h1>Attribute Selectors</h1>
+	<a href="#">Naver</a>
+	<a href="#" target="_blank">Google</a>
+	<a href="#" target="_self">Daum</a>
+	<hr>
+	<img src="h1_cgv.png" title="cgv logo" class="cgv-logo">
+	<img src="h1_cgv.png" title="cgv" class="cgv-img">
+	<img src="h1_cgv.png" title="logo" class="cgvlogo">
+	<img src="h1_cgv.png" title="logo" class="cgvtest">
+</body>
+</html>
