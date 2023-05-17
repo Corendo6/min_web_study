@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>MYCGV</title>
+</head>
+
+<body>
+    <!-- header -->
+    <iframe src="http://localhost:9000/my_cgv/header.html" scrolling="no" width="100%" height="300px"
+        frameborder="0"></iframe>
+    <!-- content -->
+    <div class="content">
+        <section class="board">
+            <h1>게시판</h1>
+            <form name="updateForm" action="#" method="get">
+                <table border="1">
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text" name="btitle" value="스즈메 문단속 재밌어요~^^"></td>
+                    </tr>
+                    <tr>
+                        <th>내용</th>
+                        <td>
+                            <textarea name="bcontent" cols="30" rows="5">스즈메 문단속 재밌어요~^^
+스즈메 문단속 재밌어요~^^</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td>
+                            <input type="text" name="id" value="hong1234">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit">수정</button>
+                            <button type="reset">다시쓰기</button>
+                            <a href="board_content.html"><button type="button">취소</button></a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </div>
+    <!-- footer -->
+    <iframe src="http://localhost:9000/my_cgv/footer.html" scrolling="no" width="100%" height="500px"
+        frameborder="0"></iframe>
+</body>
+
+</html>
