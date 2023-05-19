@@ -15,6 +15,14 @@ public class BoardController {
 	}
 	
 	/**
+	 * board-list-user.do 전체 리스트
+	 */
+	@RequestMapping(value = "/board-list-user.do", method = RequestMethod.GET)
+	public String boardListUser() {
+		return "/board/board_list_user";
+	}
+	
+	/**
 	 * board-write.do 전체 리스트
 	 */
 	@RequestMapping(value = "/board-write.do", method = RequestMethod.GET)
@@ -29,4 +37,5 @@ public class BoardController {
 	public String boardContent() {
 		return "/board/board_content";
 	}
+	
 }
