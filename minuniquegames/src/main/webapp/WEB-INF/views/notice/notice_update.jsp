@@ -6,29 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Unique Games</title>
-	<link rel="stylesheet" href="http://localhost:9000/uniquegames/css/mainunigames.css">
-	<link rel="stylesheet" href="http://localhost:9000/uniquegames/css/board.css">
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script><!-- 마이크로소프트 jQuery-->
-	<script src="http://localhost:9000/uniquegames/js/board.js"></script>
+<link rel="stylesheet" href="http://localhost:9000/minuniquegames/css/mainunigames.css">
+<link rel="stylesheet" href="http://localhost:9000/minuniquegames/css/board.css">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="http://localhost:9000/minuniquegames/js/board.js"></script>
 
 </head>
 
 <body>
 	<header>
-		<iframe src="../main/header.html" scrolling="no" width="100%" height="228px" frameborder=0></iframe>
+		<jsp:include page="../main/header.jsp"></jsp:include>
 	</header>
 	<section id="top-bg">
 		<div id="base-layer">
 			<div id="top-bg-textarea">
-				<p id="top-title">Notice</p>
-				<p id="top-subtitle">#공지사항</p>
+				<p id="top-title">Board</p>
+				<p id="top-subtitle">#게시판</p>
 			</div>
 		</div>
 	</section>
 	<div id="content">
 		<div id="board-write">
 			<div id="board-top-menu">
-				<p>Notice</p>
+				<p>Board</p>
 				<div>
 					<ul>
 						<li><button type="button" id="btn-style" name="write">저장</button></li>
@@ -37,7 +37,7 @@
 				</div>
 				<div id="clearFix"></div>
 			</div>
-			<form name="writeForm" action="boardWriteForm.jsp" method="post">
+			<form name="writeForm" action="#" method="post">
 				<table>
 					<tr>
 						<th>제목</th>
@@ -53,8 +53,7 @@
 		</div>
 	</div>
 	<footer>
-		<iframe src="../main/footer.html" scrolling="no" width="100%"
-			height="646px" frameborder=0></iframe>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</footer>
 </body>
 

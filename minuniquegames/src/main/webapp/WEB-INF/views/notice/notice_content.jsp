@@ -7,10 +7,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Unique Games</title>
-	<link rel="stylesheet" href="http://localhost:9000/uniquegames/css/mainunigames.css">
-	<link rel="stylesheet" href="http://localhost:9000/uniquegames/css/board.css">
+	<link rel="stylesheet" href="http://localhost:9000/minuniquegames/css/mainunigames.css">
+	<link rel="stylesheet" href="http://localhost:9000/minuniquegames/css/board.css">
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script><!-- 마이크로소프트 jQuery-->
-	<script src="http://localhost:9000/uniquegames/js/board.js"></script>
+	<script src="http://localhost:9000/minuniquegames/js/board.js"></script>
 </head>
 
 <body>
@@ -21,15 +21,15 @@
 	<section id="top-bg">
 		<div id="base-layer">
 			<div id="top-bg-textarea">
-				<p id="top-title">Notice</p>
-				<p id="top-subtitle">#공지사항</p>
+			<p id="top-title">Board</p>
+			<p id="top-subtitle">#게시판</p>
 			</div>
 		</div>
 	</section>
 	<div id="content">
 		<div id="board-content">
 			<div id="board-top-menu">
-				<p>Notice</p>
+				<p>Board</p>
 				<div>
 					<ul>
 						<li><button type="button" id="btn-style" name="update">수정</button></li>
@@ -156,7 +156,7 @@
 	});
 
 	$('button[name="update"]').on("click", function () {
-			location.href = "board_update.jsp?f=up&id=<%= bid %>";
+			location.href = "notice-update.do?f=up&id=<%= bid %>";
 		})
 </script>
 </body>

@@ -40,14 +40,14 @@ $(document).ready(function() {
 				$("input[name='list[]']").prop("checked", false);
 				return false;
 			} else {
-				location.href = "board-write.do?f=up&id=" + $(checked).val();
+				location.href = "notice-write.do?f=up&id=" + $(checked).val();
 			}
 		}
 	});
 
 	// 작성 버튼 이벤트
 	$('button[name="listWrite"]').on("click", function() {
-		location.href = "board-write.do";
+		location.href = "notice-write.do";
 	});
 
 	/**
@@ -73,9 +73,9 @@ $(document).ready(function() {
 		const URLSearch = new URLSearchParams(location.search);
 		console.log(URLSearch.get('f'));
 		if (URLSearch.get('f') == "up") {
-			location.href = "board-content.do";
+			location.href = "notice-content.do";
 		} else {
-			location.href = "board-list.do";
+			location.href = "notice-list.do";
 		}
 	});
 
@@ -91,17 +91,17 @@ $(document).ready(function() {
 	$('button[name="delete"]').on("click", function() {
 		if (confirm("정말로 삭제하시겠습니까?")) {
 			alert("삭제됨");
-			location.href = "board-list.do";
+			location.href = "notice-list.do";
 		}
 	})
 	// 목록 버튼 이벤트
 	$('button[name="list"]').on("click", function() {
-		location.href = "board-list.do";
+		location.href = "notice-list.do";
 	})
 	
 	$('button[name="cmtWrite"]').on("click", function() {
 		if ($("#form-control").val() != "")
-			location.href = "board-content.do";
+			location.href = "notice-content.do";
 		else
 			alert("댓글 내용을 입력하세요.");
 	})
