@@ -40,14 +40,14 @@ $(document).ready(function() {
 				$("input[name='list[]']").prop("checked", false);
 				return false;
 			} else {
-				location.href = "notice-write.do?f=up&id=" + $(checked).val();
+				location.href = "notice_write.do?f=up&id=" + $(checked).val();
 			}
 		}
 	});
 
 	// 작성 버튼 이벤트
 	$('button[name="listWrite"]').on("click", function() {
-		location.href = "notice-write.do";
+		location.href = "notice_write.do";
 	});
 
 	/**
@@ -73,9 +73,9 @@ $(document).ready(function() {
 		const URLSearch = new URLSearchParams(location.search);
 		console.log(URLSearch.get('f'));
 		if (URLSearch.get('f') == "up") {
-			location.href = "notice-content.do";
+			location.href = "notice_content.do";
 		} else {
-			location.href = "notice-list.do";
+			location.href = "notice_list.do";
 		}
 	});
 
@@ -83,26 +83,63 @@ $(document).ready(function() {
 	 * content 버튼 이벤트
 	 */
 	// 수정 버튼 이벤트
-//	$('button[name="update"]').on("click", function() {
-//		location.href = "board_write.jsp?f=up&id=";
-//		
-//	})
+	$('button[name="update"]').on("click", function() {
+		let no = $("input[name='no']").val();
+		location.href = "notice_update.do?no=" + no;
+	})
+
 	// 삭제 버튼 이벤트
 	$('button[name="delete"]').on("click", function() {
+
 		if (confirm("정말로 삭제하시겠습니까?")) {
-			alert("삭제됨");
-			location.href = "notice-list.do";
+			noticeDelete.submit();
 		}
 	})
 	// 목록 버튼 이벤트
 	$('button[name="list"]').on("click", function() {
-		location.href = "notice-list.do";
+		location.href = "notice_list.do";
 	})
 	
 	$('button[name="cmtWrite"]').on("click", function() {
 		if ($("#form-control").val() != "")
-			location.href = "notice-content.do";
+			location.href = "notice_content.do";
 		else
 			alert("댓글 내용을 입력하세요.");
 	})
+	
+	// 모달 이벤트
+	const reportBtn = document.querySelectorAll(".report");
+	const modal = document.getElementById("modal-background");
+	const modalCloseBtn = document.getElementById("modal-close");
+	const modalReportBtn = document.getElementById("modal-report");
+
+	function modalOff() {
+		modal.style.display = "none";
+	}
+	reportBtn.forEach(e => {
+		e.addEventListener("click", e => {
+			modal.style.display = "flex";
+		});
+	});
+
+	modalCloseBtn.addEventListener("click", e => {
+		modalOff();
+	});
+	modalReportBtn.addEventListener("click", e => {
+		modalOff();
+	});
+
+	modal.addEventListener("click", e => {
+		const eventTarget = e.target;
+		if (eventTarget.classList.contains("test")) {
+			modalOff()
+		};
+	});
+
+	window.addEventListener("keyup", e => {
+		if (modal.style.display === "flex" && e.key === "Escape") {
+			modalOff()
+		};
+	});
+
 });

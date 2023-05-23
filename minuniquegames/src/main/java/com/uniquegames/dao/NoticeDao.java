@@ -40,4 +40,103 @@ public class NoticeDao extends DBConnBoard {
 		}
 		return list;
 	}
+
+	/**
+	 * select - 공지사항 상세 보기
+	 */
+	public NoticeVo select(String no) {
+		NoticeVo result = new NoticeVo();
+
+		String sql = "SELECT POST_ID, COMPANY_ID, TITLE, CONTENT, NOTICE_HITS, CAST( DATE_FORMAT( NOTICE_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS NOTICE_DATE "
+				+ " FROM NOTICE WHERE POST_ID = ?";
+		getPreparedStatment(sql);
+
+		try {
+
+			pstmt.setString(1, no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result.setPost_id(rs.getInt(1));
+				result.setCompany_id(rs.getString(2));
+				result.setTitle(rs.getString(3));
+				result.setContent(rs.getString(4));
+				result.setNotice_hits(rs.getInt(5));
+				result.setNotice_date(rs.getTimestamp(6));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	/**
+	 * insert - 공지사항 작성
+	 */
+	public int insert(NoticeVo noticeVo) {
+		int result = 0;
+
+		String sql = "INSERT INTO NOTICE (COMPANY_ID, TITLE, CONTENT, NOTICE_HITS, NOTICE_DATE) "
+				+ " VALUES ('test', ?, ?, 0, NOW())";
+		getPreparedStatment(sql);
+
+		try {
+
+			pstmt.setString(1, noticeVo.getTitle());
+			pstmt.setString(2, noticeVo.getContent());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	/**
+	 * update - 공지사항 수정
+	 */
+	public int update(NoticeVo noticeVo) {
+		int result = 0;
+
+		String sql = "UPDATE NOTICE SET TITLE = ?, CONTENT = ? WHERE POST_ID = ?";
+		getPreparedStatment(sql);
+
+		try {
+
+			pstmt.setString(1, noticeVo.getTitle());
+			pstmt.setString(2, noticeVo.getContent());
+			pstmt.setInt(3, noticeVo.getPost_id());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * delete - 공지사항 삭제
+	 */
+	public int delete(String no) {
+		int result = 0;
+
+		String sql = "DELETE FROM NOTICE WHERE POST_ID = ?";
+		getPreparedStatment(sql);
+
+		try {
+
+			pstmt.setString(1, no);
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 }

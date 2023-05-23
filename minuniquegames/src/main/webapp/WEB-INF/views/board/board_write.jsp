@@ -35,7 +35,7 @@
 				</div>
 				<div id="clearFix"></div>
 			</div>
-			<form name="writeForm" action="notice-write-proc.do" method="post">
+			<form name="writeForm" action="notice_write_proc.do" method="post">
 				<table>
 					<tr>
 						<th>제목</th>

@@ -14,6 +14,14 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
 <!-- 마이크로소프트 jQuery-->
 <script src="http://localhost:9000/uniquegames/js/board.js"></script>
+<c:choose>
+	<c:when test="${result eq 'success'}">
+		<script>alert("성공적으로 등록되었습니다.")</script>
+	</c:when>
+	<c:when test="${result eq 'fail'}">
+		<script>alert("작업에 실패했습니다.\n잠시후에 다시 시도해주세요.")</script>
+	</c:when>
+</c:choose>
 </head>
 
 <body>
@@ -62,7 +70,7 @@
 					<tr>
 						<td><input type="checkbox" name="list[]" value="${noticeVo.post_id}"></td>
 						<td>${noticeVo.rno}</td>
-						<td><a href="notice-content.do?no=${noticeVo.post_id}">${noticeVo.title}</a></td>
+						<td><a href="notice_content.do?no=${noticeVo.post_id}">${noticeVo.title}</a></td>
 						<td>${noticeVo.company_id}</td>
 						<td>${noticeVo.notice_date}</td>
 					</tr>

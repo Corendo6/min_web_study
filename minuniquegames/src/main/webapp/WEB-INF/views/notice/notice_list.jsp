@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -52,21 +53,15 @@
 						<th>작성자</th>
 						<th>작성일</th>
 					</tr>
-					<%
-						String bid = "id";
-						for (int i = 1; i <= 10; i++) {
-					%>
+					<c:forEach var="noticeVo" items="${list}">
 					<tr>
-						<td><input type="checkbox" name="list[]" value=<%= bid + i %>></td>
-						<td><%= i %></td>
-						<td><a href="notice-content.do?no=<%= bid + i %>">아 제목인데 너무 길게 쓰지않고 적당한
-								길이로 대충 때울려고합니다~예~ 그럼요</a></td>
-						<td>관리자</td>
-						<td>2023.04.25</td>
+						<td><input type="checkbox" name="list[]" value="${noticeVo.post_id}"></td>
+						<td>${noticeVo.rno}</td>
+						<td><a href="notice-content.do?no=${noticeVo.post_id}">${noticeVo.title}</a></td>
+						<td>${noticeVo.company_id}</td>
+						<td>${noticeVo.notice_date}</td>
 					</tr>
-					<%
-						}
-					%>
+					</c:forEach>
 					<tr>
 						<td colspan="5">
 							<ul id="paging">

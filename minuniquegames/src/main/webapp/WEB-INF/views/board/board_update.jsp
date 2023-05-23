@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% String id = request.getParameter("id"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +14,7 @@
 
 <body>
 	<header>
-		<iframe src="../main/header.html" scrolling="no" width="100%" height="228px" frameborder=0></iframe>
+		<jsp:include page="../main/header.jsp"></jsp:include>
 	</header>
 	<section id="top-bg">
 		<div id="base-layer">
@@ -37,24 +36,24 @@
 				</div>
 				<div id="clearFix"></div>
 			</div>
-			<form name="writeForm" action="boardWriteForm.jsp" method="post">
+			<form name="writeForm" action="notice_update_proc.do" method="post">
 				<table>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="btitle" id="default-write" value="받은 id값 = <%= id %>"></td>
+						<td><input type="text" name="title" id="default-write" value="${noticeVo.title}"></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="bcontent" cols="30" rows="5"
-								id="default-write">받은 id값 이용해서 db연동 해야 함</textarea></td>
+						<td><textarea name="content" cols="30" rows="5"
+								id="default-write">${noticeVo.content}</textarea></td>
 					</tr>
 				</table>
+				<input type="hidden" name="post_id" value="${noticeVo.post_id}">
 			</form>
 		</div>
 	</div>
 	<footer>
-		<iframe src="../main/footer.html" scrolling="no" width="100%"
-			height="646px" frameborder=0></iframe>
+		<jsp:include page="../main/footer.jsp"></jsp:include>
 	</footer>
 </body>
 
