@@ -9,16 +9,19 @@ public class NoticeDao extends DBConnBoard {
 	/**
 	 * select - 전체 리스트 조회
 	 */
-	public ArrayList<NoticeVo> select() {
+	public ArrayList<NoticeVo> select(int startCount, int endCount) {
 		ArrayList<NoticeVo> list = new ArrayList<NoticeVo>();
 
-		String sql = "SELECT @ROWNUM:= @ROWNUM + 1 AS RNO, POST_ID, TITLE, CONTENT, COMPANY_ID, NOTICE_HITS, CAST( DATE_FORMAT( NOTICE_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS NOTICE_DATE\r\n"
-				+ "FROM (SELECT POST_ID, TITLE, CONTENT, COMPANY_ID, NOTICE_HITS, NOTICE_DATE FROM NOTICE ORDER BY NOTICE_DATE DESC) SUB, (SELECT @ROWNUM:=0) TMP";
+		String sql = "SELECT * FROM (SELECT @ROWNUM:= @ROWNUM + 1 AS RNO, POST_ID, TITLE, CONTENT, COMPANY_ID, NOTICE_HITS, CAST( DATE_FORMAT( NOTICE_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS NOTICE_DATE\r\n" + 
+				" FROM (SELECT POST_ID, TITLE, CONTENT, COMPANY_ID, NOTICE_HITS, NOTICE_DATE FROM NOTICE ORDER BY NOTICE_DATE DESC) SUB, (SELECT @ROWNUM:=0) TMP) T1 \r\n" + 
+				" WHERE RNO between ? AND ?";
 
 		getPreparedStatment(sql);
 
 		try {
-
+			
+			pstmt.setInt(1, startCount);
+			pstmt.setInt(2, endCount);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -30,7 +33,7 @@ public class NoticeDao extends DBConnBoard {
 				noticeVo.setContent(rs.getString(4));
 				noticeVo.setCompany_id(rs.getString(5));
 				noticeVo.setNotice_hits(rs.getInt(6));
-				noticeVo.setNotice_date(rs.getDate(7));
+				noticeVo.setNotice_date(rs.getTimestamp(7));
 
 				list.add(noticeVo);
 			}
@@ -137,6 +140,46 @@ public class NoticeDao extends DBConnBoard {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+
+	/**
+	 * hitCount - 조회수 증가
+	 */
+	public void hitCount(String no) {
+
+		String sql = "UPDATE NOTICE SET NOTICE_HITS = NOTICE_HITS + 1 WHERE POST_ID = ?";
+		getPreparedStatment(sql);
+
+		try {
+
+			pstmt.setString(1, no);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * totRowCount - 페이징 처리용 전체 컬럼 수
+	 */
+	public int totRowCount() {
+		int result = 0;
+		
+		String sql = "select count(*) from notice";
+		getPreparedStatment(sql);
+		
+		try {
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 }

@@ -95,51 +95,17 @@ $(document).ready(function() {
 			noticeDelete.submit();
 		}
 	})
+
 	// 목록 버튼 이벤트
 	$('button[name="list"]').on("click", function() {
 		location.href = "notice_list.do";
 	})
-	
+
+	// 댓글 작성 이벤트
 	$('button[name="cmtWrite"]').on("click", function() {
 		if ($("#form-control").val() != "")
-			location.href = "notice_content.do";
+			commentWriteForm.submit();
 		else
 			alert("댓글 내용을 입력하세요.");
 	})
-	
-	// 모달 이벤트
-	const reportBtn = document.querySelectorAll(".report");
-	const modal = document.getElementById("modal-background");
-	const modalCloseBtn = document.getElementById("modal-close");
-	const modalReportBtn = document.getElementById("modal-report");
-
-	function modalOff() {
-		modal.style.display = "none";
-	}
-	reportBtn.forEach(e => {
-		e.addEventListener("click", e => {
-			modal.style.display = "flex";
-		});
-	});
-
-	modalCloseBtn.addEventListener("click", e => {
-		modalOff();
-	});
-	modalReportBtn.addEventListener("click", e => {
-		modalOff();
-	});
-
-	modal.addEventListener("click", e => {
-		const eventTarget = e.target;
-		if (eventTarget.classList.contains("test")) {
-			modalOff()
-		};
-	});
-
-	window.addEventListener("keyup", e => {
-		if (modal.style.display === "flex" && e.key === "Escape") {
-			modalOff()
-		};
-	});
-
 });

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Unique Games</title>
-    <link rel="stylesheet" type="text/css" href="http://localhost:9000/uniquegames/css/unigames.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://localhost:9000/uniquegames/css/unigames.css"> -->
 	<style>
 		#btn-hearder-search {
 			border:none;
@@ -36,7 +36,7 @@
    		}
 
 	</style>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 </head>
 
 <body>

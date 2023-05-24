@@ -10,6 +10,7 @@ public class NoticeVo {
 	String content;
 	int notice_hits;
 	Date notice_date;
+	String date_output;
 
 	public int getRno() {
 		return rno;
@@ -65,6 +66,14 @@ public class NoticeVo {
 
 	public void setNotice_date(Date notice_date) {
 		this.notice_date = notice_date;
+	}
+
+	public String getDate_output() {
+		return date_output;
+	}
+
+	public void setDate_output(String date_output) {
+		this.date_output = date_output;
 	}
 
 }
