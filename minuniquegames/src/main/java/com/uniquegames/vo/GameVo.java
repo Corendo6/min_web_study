@@ -1,10 +1,10 @@
 package com.uniquegames.vo;
 
-//import lombok.Getter;
-//import lombok.Setter;
-//
-//@Getter
-//@Setter
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GameVo {
     int id;
     String name = "";
