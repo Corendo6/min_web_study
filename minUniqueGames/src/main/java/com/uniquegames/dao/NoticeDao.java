@@ -11,10 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.uniquegames.vo.NoticeVo;
 
-@Repository
 public class NoticeDao {
 
-	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	private static final String NAMESPACE = "com.uniquegames.noticeMapper";

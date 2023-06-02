@@ -73,6 +73,9 @@
 /* #btn-search:hover  */
 
 /* board */
+#admin-btable {
+	table-layout: fixed;
+}
 #admin-btable th {
 	border-bottom: 1px solid #DDDDDD;
 }
@@ -88,10 +91,20 @@
 #admin-btable tr>th:nth-child(2),
 #admin-btable tr>td:nth-child(2) {
 	padding: 8px;
+	width: 35px;
 }
 
 #admin-btable tr>td:nth-child(3) {
 	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#admin-btable tr>th:nth-child(3),
+#admin-btable tr>td:nth-child(3) {
+	max-width: 671px;
+	width: 671px;
 }
 
 #paging {

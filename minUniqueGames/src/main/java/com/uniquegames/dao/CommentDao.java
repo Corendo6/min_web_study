@@ -9,10 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.uniquegames.vo.CommentVo;
 
-@Repository
 public class CommentDao {
 
-	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	private static final String NAMESPACE = "com.uniquegames.noticeMapper";
