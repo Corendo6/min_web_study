@@ -1,7 +1,9 @@
 package com.uniquegames.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.uniquegames.vo.CommentVo;
@@ -9,7 +11,7 @@ import com.uniquegames.vo.NoticeVo;
 
 @Repository
 public interface NoticeMapper {
-	ArrayList<NoticeVo> selectNotice(int startCount, int endCount);
+	ArrayList<NoticeVo> selectNotice(@Param("start") int startCount, @Param("end") int endCount);
 
 	NoticeVo selectContent(String no);
 
@@ -21,6 +23,9 @@ public interface NoticeMapper {
 
 	int deleteList(String[] list);
 
+	List<NoticeVo> searchList(@Param("keyword") String keyword, @Param("start") int startCount,
+			@Param("end") int endCount);
+
 	void hitsCount(String no);
 
 	int insertFile(NoticeVo noticeVo);
@@ -29,9 +34,9 @@ public interface NoticeMapper {
 
 	int updateUploadFile(NoticeVo noticeVo);
 
-	int fileCheck(NoticeVo noticeVo);
+	int deleteFile(NoticeVo noticeVo);
 
-	int totRowCount();
+	int fileCheck(NoticeVo noticeVo);
 
 	ArrayList<CommentVo> selectComment(String no);
 

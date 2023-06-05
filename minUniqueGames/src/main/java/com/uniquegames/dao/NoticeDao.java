@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uniquegames.vo.NoticeVo;
 
-public class NoticeDao {
+public class NoticeDao extends DBConn {
 
 	private SqlSessionTemplate sqlSession;
 
@@ -62,12 +62,12 @@ public class NoticeDao {
 
 		return sqlSession.delete(NAMESPACE + ".delete", no);
 	}
-	
+
 	/**
 	 * deleteList - 공지사항 리스트 선택 삭제
 	 */
 	public int deleteList(String[] list) {
-		
+
 		return sqlSession.delete(NAMESPACE + ".deleteList", list);
 	}
 
@@ -82,9 +82,35 @@ public class NoticeDao {
 	/**
 	 * totRowCount - 페이징 처리용 전체 컬럼 수
 	 */
-	public int totRowCount() {
+	public int totRowCount(String keyword) {
+		int result = 0;
+		String sql = "";
+		if (keyword.equals("list")) {
+			sql = "SELECT COUNT(*) FROM NOTICE";
 
-		return sqlSession.selectOne(NAMESPACE + ".totRowCount");
+		} else {
+			sql = "SELECT COUNT(*) FROM NOTICE WHERE TITLE LIKE CONCAT('%', ?, '%')";
+
+		}
+		getPreparedStatement(sql);
+
+		try {
+			if (!keyword.equals("list")) {
+				pstmt.setString(1, keyword);
+
+			}
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				result = rs.getInt(1);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		return result;
 	}
 
 	/**

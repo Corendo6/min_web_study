@@ -15,7 +15,7 @@
 	font-size: 0px;
 }
 
-#board-write>table {
+#board-write>form>table {
 	border-collapse: collapse;
 	border: 1px solid #DDDDDD;
 	border-top: 2px solid #393939;
@@ -27,7 +27,13 @@
 	float: left;
 }
 
-#board-top-menu>div>label>input {
+#board-top-menu>div>form {
+	position: relative;
+	margin-left: 410px;
+	display: inline;
+}
+
+#board-top-menu>div>form input {
 	width: 215px;
 	height: 14px;
 	border: 1px solid #DDDDDD;
@@ -35,10 +41,10 @@
 	font-size: 14px;
 }
 
-#board-top-menu>div>label {
+/* #board-top-menu>div>form label {
 	position: relative;
 	margin-left: 410px;
-}
+} */
 
 #bsearch-box {
 	float: right;
@@ -194,6 +200,11 @@ td {
     color: #999999;
 }
 
+#fileDelbtn {
+    display: inline-block;
+   	vertical-align: middle;
+}
+
 #filebox>button {
     display: inline-block;
 	vertical-align: middle;
@@ -235,7 +246,8 @@ td {
 #details {
 	padding: 10px 30px;
 	text-align: left;
-	white-space: pre;
+	white-space: pre-line;
+	max-width: 1000px;
 }
 
 #clearFix {
