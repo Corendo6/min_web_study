@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniquegames.fileutil.BoardUtil;
+import com.uniquegames.model.SessionConstants;
 import com.uniquegames.service.CommentService;
 import com.uniquegames.service.NoticeService;
 import com.uniquegames.vo.CommentVo;
@@ -37,7 +40,8 @@ public class NoticeController {
 	 * notice-list.do 공지사항 - 전체 리스트
 	 */
 	@RequestMapping(value = "/notice_list.do", method = RequestMethod.GET)
-	public ModelAndView noticeList(String page) {
+	public ModelAndView noticeList(String page, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		ModelAndView model = new ModelAndView();
 
 		// 페이징 처리 - startCount, endCount 구하기
@@ -101,8 +105,7 @@ public class NoticeController {
 		ModelAndView model = new ModelAndView();
 
 		NoticeVo noticeVo = noticeService.getNoticeContent(stat, no);
-
-		ArrayList<CommentVo> commList = commentService.select(no);
+		List<CommentVo> commList = commentService.select(no);
 
 		model.addObject("noticeVo", noticeVo);
 		model.addObject("commList", commList);
@@ -171,16 +174,12 @@ public class NoticeController {
 	 * comment_write_proc.do 댓글 - 작성 처리
 	 */
 	@RequestMapping(value = "comment_write_proc.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String commentWriteProc(CommentVo commentVo, RedirectAttributes attributes) {
 
-		int result = commentService.commentInsert(commentVo);
-		if (result == 1) {
-			attributes.addFlashAttribute("cmtresult", "success");
-		} else {
-			attributes.addFlashAttribute("cmtresult", "fail");
-		}
+		String result = commentService.commentInsert(commentVo);
 
-		return "redirect:/notice_content.do?no=" + commentVo.getPost_id();
+		return result;
 	}
 
 	/**
@@ -217,6 +216,7 @@ public class NoticeController {
 		Map<String, Integer> pageMap = BoardUtil.getPagination(page, keyword);
 		List<NoticeVo> list = (List<NoticeVo>) noticeService.search(keyword, pageMap.get("startCount"),
 				pageMap.get("endCount"));
+
 		model.addObject("list", list);
 		model.addObject("dbCount", pageMap.get("dbCount"));
 		model.addObject("pageSize", pageMap.get("pageSize"));

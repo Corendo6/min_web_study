@@ -17,7 +17,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	private NoticeMapper noticeMapper;
-
+	
 	/**
 	 * 공지사항 - 전체 리스트 조회
 	 */

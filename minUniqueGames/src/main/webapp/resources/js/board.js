@@ -168,10 +168,29 @@ $(document).ready(function() {
 	})
 
 	// 댓글 작성 이벤트
-	$('button[name="cmtWrite"]').on("click", function() {
-		if ($("#form-control").val() != "")
-			commentWriteForm.submit();
-		else
+	$('button[name="cmtWrite"]').on("click", function () {
+		let url = window.location.href;
+
+		if ($("#form-control").val() != "") {
+			$.ajax({
+				url: "comment_write_proc.do",
+				data: $("#comment-write").serialize(),
+				dataType: "text",
+				async: true,
+				Cache: false,
+				type: "POST",
+				success: function (result) {
+					if (result == "SUCCESS") {
+						alert("댓글이 등록되었습니다.");
+						window.location.replace(url);
+					} else {
+						alert("댓글 등록이 실패하였습니다.");
+					}
+				},
+				error: function (xhr, status, error) { }
+			});
+
+		} else
 			alert("댓글 내용을 입력하세요.");
 	})
 	
@@ -224,6 +243,7 @@ $(document).ready(function() {
 
 });
 
+// 댓글 삭제 이벤트
 function commentDelete(commentId) {
 	if (confirm('댓글을 삭제하시겠습니까?')) {
 		let url = window.location.href;
@@ -268,12 +288,15 @@ function getResult(result) {
 	if (result == 'insuccess') {
 		alert("게시글이 성공적으로 등록되었습니다.");
 	}
+
 	if (result == 'upsuccess') {
 	alert("수정되었습니다.");
 	}
+
 	if (result == 'fail') {
 		alert("작업에 실패했습니다.\n잠시후에 다시 시도해주세요.");
 	}
+
 	history.replaceState({},null,null);
 }
 
@@ -281,8 +304,10 @@ function getResultCmt(result) {
 	if (result == 'success') {
 		alert("댓글이 등록되었습니다.");
 	}
+
 	if (result == 'fail') {
 		alert("작업에 실패했습니다.\n잠시후에 다시 시도해주세요.");
 	}
+
 	history.replaceState({},null,null);
 }
