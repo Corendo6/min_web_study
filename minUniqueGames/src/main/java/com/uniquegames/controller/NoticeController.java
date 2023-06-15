@@ -44,6 +44,7 @@ public class NoticeController {
 			throws Exception {
 		ModelAndView model = new ModelAndView();
 
+		HttpSession session = request.getSession();
 		// 페이징 처리 - startCount, endCount 구하기
 		Map<String, Integer> pageMap = BoardUtil.getPagination(page, "list");
 		ArrayList<NoticeVo> list = noticeService.getNoticeList(pageMap.get("startCount"), pageMap.get("endCount"));
@@ -54,7 +55,13 @@ public class NoticeController {
 		model.addObject("pageCount", pageMap.get("pageCount"));
 		model.addObject("page", pageMap.get("reqPage"));
 
-		model.setViewName("/notice/notice_list");
+//		if (session.getAttribute(SessionConstants.LOGIN_MEMBER) == null) {
+//			model.setViewName("/notice/notice_list_user");
+//
+//		} else {
+			model.setViewName("/notice/notice_list");
+
+//		}
 
 		return model;
 	}
@@ -206,12 +213,14 @@ public class NoticeController {
 	}
 
 	/**
-	 * boardSearchProc.do 리스트 검색 처리
+	 * notice_Search.do 리스트 검색 처리
 	 */
-	@RequestMapping(value = "/boardSearchProc.do")
+	@RequestMapping(value = "/notice_Search.do")
 	@SuppressWarnings("unchecked")
-	public ModelAndView boardSearchProc(String keyword, String page) {
+	public ModelAndView boardSearchProc(String keyword, String page, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		ModelAndView model = new ModelAndView();
+		HttpSession session = request.getSession();
 
 		Map<String, Integer> pageMap = BoardUtil.getPagination(page, keyword);
 		List<NoticeVo> list = (List<NoticeVo>) noticeService.search(keyword, pageMap.get("startCount"),
@@ -222,7 +231,14 @@ public class NoticeController {
 		model.addObject("pageSize", pageMap.get("pageSize"));
 		model.addObject("pageCount", pageMap.get("pageCount"));
 		model.addObject("page", pageMap.get("reqPage"));
-		model.setViewName("/notice/notice_list");
+
+		if (session.getAttribute(SessionConstants.LOGIN_MEMBER) == null) {
+			model.setViewName("/notice/notice_list_user");
+
+		} else {
+			model.setViewName("/notice/notice_list");
+
+		}
 
 		return model;
 	}

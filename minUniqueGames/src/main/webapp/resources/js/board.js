@@ -69,12 +69,17 @@ $(document).ready(function() {
 		searchScript();
 	})
 
-	$('input[name="search"]').on("keydown",function(event) {
+	$('input[name="keyword"]').on("keydown",function(event) {
 		if (event.keyCode === 13) {
 			event.preventDefault();
-			searchScript();
+			searchScript();			
+		} 
+	})
 
-		}
+	// 목록 버튼 이벤트
+	$('button[name="getList"]').on("click", function() {
+
+		location.href = "notice_list.do";
 	})
 
 	/**
@@ -160,11 +165,6 @@ $(document).ready(function() {
 		if (confirm("정말로 삭제하시겠습니까?")) {
 			noticeDelete.submit();
 		}
-	})
-
-	// 목록 버튼 이벤트
-	$('button[name="list"]').on("click", function() {
-		location.href = "notice_list.do";
 	})
 
 	// 댓글 작성 이벤트
@@ -273,8 +273,9 @@ function commentDelete(commentId) {
 	}
 }
 
+// 검색 이벤트
 function searchScript() {
-	if($('input[name="search"]').val() == "") {
+	if($('input[name="keyword"]').val() == "") {
 		alert("검색어를 입력하세요");
 		
 		return false;
@@ -284,6 +285,7 @@ function searchScript() {
 	}
 }
 
+// alert 중복 방지를 위한 스크립트
 function getResult(result) {
 	if (result == 'insuccess') {
 		alert("게시글이 성공적으로 등록되었습니다.");
@@ -310,4 +312,51 @@ function getResultCmt(result) {
 	}
 
 	history.replaceState({},null,null);
+}
+
+// 세션에 따른 페이지 구성
+function test(login) {
+	console.log(login);
+	if (login.includes("MemberVo") || login == "") {
+		
+		var str = "";
+
+		str += "		<p>Notice</p>";
+		str += "		<div id='bsearch-box'>";
+		str += "			  <form name='boardSearch' action='notice_Search.do' method='get'>";
+		str += "				<label>";
+		str += "					<input type='text' name='keyword' placeholder='검색어를 입력해주세요.'>";
+		str += "					<button type='button' id='btn-search'>";
+		str += "						<img src='http://localhost:9000/uniquegames/images/btn_boardSearch_press.png'>";
+		str += "					</button>";
+		str += "				</label>";
+		str += "			 </form>";
+		str += "			<ul>";
+		str += "				<li><button type='button' id='btn-style' name='getList'>목록</button></li>";
+		str += "			</ul>";
+		str += "		</div>";
+		str += "		<div id='clearFix'></div>";
+
+	} else if (login.includes("CompanyVo")) {
+		str += "		<p>Notice</p>";
+		str += "		<div>";
+		str += "			  <form name='boardSearch' action='notice_Search.do' method='get'>";
+		str += "				<label>";
+		str += "					<input type='text' name='keyword' placeholder='검색어를 입력해주세요.'>";
+		str += "					<button type='button' id='btn-search'>";
+		str += "						<img src='http://localhost:9000/uniquegames/images/btn_boardSearch_press.png'>";
+		str += "					</button>";
+		str += "				</label>";
+		str += "			 </form>";
+		str += "			<ul>";
+		str += "				<li><button type='button' id='btn-style' name='listWrite'>작성</button></li>";
+		str += "				<li><button type='button' id='btn-style' name='listUpdate'>수정</button></li>";
+		str += "				<li><button type='button' id='btn-style' name='listDelete'>삭제</button></li>";
+		str += "				<li><button type='button' id='btn-style' name='listDeleteAll'>전체삭제</button></li>";
+		str += "			</ul>";
+		str += "		</div>";
+
+	}
+
+	$("#board-top-menu").html(str);
 }
